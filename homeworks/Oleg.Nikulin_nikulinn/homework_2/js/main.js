@@ -1,57 +1,65 @@
 (function () {
   // 1-st create empty array
 
-    var array = [],
+    var newArray = [],
         newData = [2, 12, 22, 6, 32],
         oldData = [12, 5, 7, 17, 22, 32];
+        arrayToFind = [3, 6, 0, -6, 12];
 
     console.log("Create empty array :");
-    console.log(array);
+    console.log(newArray);
 
   // 2-d add 100 intager to array with mathod random
 
     function createArray() {
-        array = new Array(100);
+        newArray = new Array(100);
         for (i=0; i<100; ++i) {
-            array[i] = Math.round(Math.random()*100);
+            newArray[i] = Math.round(Math.random()*100);
         }
-        return array;
+        return newArray;
     };
 
     createArray();
     console.log("Array with intager :");
-    console.log(array);
+    console.log(newArray);
 
   // 3-d search min and max value in array
 
-    function findMaxMin(value) {
-        if (value == 'resultMax') {
-            return Math.max.apply(null,array);
-        } else if (value == 'resultMin') {
-            return Math.min.apply(null,array);
+    function findMinMax(arr, str) {
+        var order = arr.sort(function(a, b){
+            return a - b;
+        });
+        if (str == 'min') {
+            return order[0];
         }
-    };
+        else if (str == 'max') {
+            return order[order.length - 1];
+        }
+    }
 
-    console.log("Max value from array : " + findMaxMin('resultMax'));
-    console.log("Min value from array : " + findMaxMin('resultMin'));
+    var resultMax = findMinMax(arrayToFind, 'max');
+    var resultMin = findMinMax(arrayToFind, 'min');
+
+    console.log("Max value from array : " + resultMax);
+    console.log("Min value from array : " + resultMin);
 
   // 4-th convert array to object
 
-    function arrayToObject(array) {
-        var object = {};
-        for (var i = 0; i < array.length; i++) {
+    function arrayToObject(newArray) {
+        var obj = {};
+        for (var i = 0; i < newArray.length; i++) {
             if (i <= 25) {
-                object[String.fromCharCode(i + 97)] = array[i];
+                obj[String.fromCharCode(i + 97)] = newArray[i];
             } else {
                 var numb = i - 25;
-                object[numb] = array[i];
+                obj[numb] = newArray[i];
             }
         }
-        return object;
+        return obj;
     };
 
     console.log("Converted object from array :");
-    console.log(arrayToObject(array));
+    console.log(arrayToObject(newArray));
 
   // 5-th make filter
 
